@@ -17,17 +17,24 @@ const userSlice = createSlice({
         email: user.email,
       }));
     },
-  },
-  setToken: (state, action) => {
-    state.token = action.payload;
-  },
-  setStatus: (state, action) => {
-    state.status = action.payload;
-  },
-  setError: (state, action) => {
-    state.error = action.payload;
-  },
 
+    addUser: (state, action) => {
+      state.users.push(action.payload);
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    logout: (state) => {
+      state.token = null; // Clear the token from the state
+      localStorage.removeItem("token"); // Clear the token from localStorage
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
